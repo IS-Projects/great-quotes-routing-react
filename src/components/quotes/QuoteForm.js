@@ -7,6 +7,7 @@ import classes from "./QuoteForm.module.css";
 
 const QuoteForm = (props) => {
   const [isEntering, setIsEntering] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const authorInputRef = useRef();
   const textInputRef = useRef();
@@ -17,9 +18,11 @@ const QuoteForm = (props) => {
     const enteredAuthor = authorInputRef.current.value;
     const enteredText = textInputRef.current.value;
 
-    // optional: Could validate here
-
-    props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    if (enteredAuthor && enteredText) {
+      props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    } else {
+      setShowError(true);
+    }
   }
 
   const finishEnteringHandler = () => {
@@ -49,7 +52,7 @@ const QuoteForm = (props) => {
               <LoadingSpinner />
             </div>
           )}
-
+          {showError && <p>Please fill out the form.</p>}
           <div className={classes.control}>
             <label htmlFor="author">Author</label>
             <input type="text" id="author" ref={authorInputRef} />

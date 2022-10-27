@@ -31,7 +31,9 @@
   background-color: #f0f0f0;
   border: 1px solid #c1d1d1;
   display: block;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 576px;
   font-size: 1.25rem;
 }
 
